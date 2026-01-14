@@ -1,0 +1,9 @@
+.custom-navbar {
+  background-color: rgb(83, 79, 79);
+}
+.custom-navbar .nav-link {
+  color: #e5e7eb;
+}
+.custom-navbar .nav-link:hover {
+  color: skyblue;
+}/*# sourceMappingURL=style.css.map */

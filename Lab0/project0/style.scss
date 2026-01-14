@@ -1,0 +1,14 @@
+$nav-bg: rgb(83, 79, 79);
+$nav-link: #e5e7eb;
+
+.custom-navbar{
+    background-color: $nav-bg;
+
+    .nav-link{
+        color: $nav-link;
+
+        &:hover{
+            color: skyblue;
+        }
+    }
+}
