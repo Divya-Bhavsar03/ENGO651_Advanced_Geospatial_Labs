@@ -5,7 +5,10 @@
   color: #e5e7eb;
 }
 .custom-navbar .nav-link:hover {
-  color: skyblue;
+  color: rgb(2, 145, 202);
+  text-decoration: underline;
+  letter-spacing: 1px;
+  background: rgb(83, 82, 82);
 }
 
 .profile-img {
