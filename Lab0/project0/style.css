@@ -85,4 +85,9 @@
   -o-object-fit: contain;
      object-fit: contain;
   border-radius: 12px;
+}
+
+.contact-container {
+  background-color: #eef3f8;
+  border-radius: 12px;
 }/*# sourceMappingURL=style.css.map */
