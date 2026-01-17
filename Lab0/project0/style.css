@@ -71,4 +71,18 @@
 .submit-btn {
   border: none;
   width: 90px;
+}
+
+.contact-links {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.contact-img {
+  width: 100px;
+  height: 100px;
+  -o-object-fit: contain;
+     object-fit: contain;
+  border-radius: 12px;
 }/*# sourceMappingURL=style.css.map */

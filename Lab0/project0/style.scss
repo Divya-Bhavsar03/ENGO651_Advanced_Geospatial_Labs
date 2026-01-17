@@ -74,3 +74,16 @@ $nav-link: #e5e7eb;
     border: none;
     width: 90px;
 }
+
+.contact-links{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.contact-img{
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+    border-radius: 12px;
+}
