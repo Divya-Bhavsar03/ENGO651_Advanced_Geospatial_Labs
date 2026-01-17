@@ -46,4 +46,14 @@
 .about-container {
   background-color: #eef3f8;
   border-radius: 12px;
+}
+
+.skill-table {
+  background-color: #f8f9fa;
+}
+.skill-table th {
+  font-size: 1.1rem;
+}
+.skill-table td {
+  vertical-align: middle;
 }/*# sourceMappingURL=style.css.map */
