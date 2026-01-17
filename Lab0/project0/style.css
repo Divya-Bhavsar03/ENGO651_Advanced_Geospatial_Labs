@@ -66,4 +66,9 @@
 }
 .skill-img:hover {
   cursor: pointer;
+}
+
+.submit-btn {
+  border: none;
+  width: 90px;
 }/*# sourceMappingURL=style.css.map */
