@@ -56,4 +56,12 @@
 }
 .skill-table td {
   vertical-align: middle;
+}
+
+.skill-img {
+  width: 70px;
+  height: 70px;
+  -o-object-fit: contain;
+     object-fit: contain;
+  margin-bottom: 10px;
 }/*# sourceMappingURL=style.css.map */
