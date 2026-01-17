@@ -33,4 +33,12 @@
   -o-object-fit: cover;
      object-fit: cover;
   border-radius: 50%;
+}
+
+.linestar-img {
+  width: 250px;
+  height: 250px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 50%;
 }/*# sourceMappingURL=style.css.map */
