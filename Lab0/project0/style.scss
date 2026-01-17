@@ -64,4 +64,8 @@ $nav-link: #e5e7eb;
     height: 120px;
     object-fit: contain;
     margin-bottom: 10px;
+
+    &:hover{
+        cursor: pointer;
+    }
 }
