@@ -17,6 +17,15 @@ body{
   );
 }
 
+.index-container{
+    background: linear-gradient(
+    135deg,
+    #2c2c2c,
+    #3b4f6b,
+    #2c2c2c
+  );
+}
+
 .custom-navbar{
     background-color: $nav-bg;
 
