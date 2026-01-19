@@ -1,3 +1,10 @@
+.nata-sans-font {
+  font-family: "Nata Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
 .custom-navbar {
   background-color: rgb(83, 79, 79);
 }

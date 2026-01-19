@@ -1,6 +1,13 @@
 $nav-bg: rgb(83, 79, 79);
 $nav-link: #e5e7eb;
 
+.nata-sans-font {
+  font-family: "Nata Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
 .custom-navbar{
     background-color: $nav-bg;
 
