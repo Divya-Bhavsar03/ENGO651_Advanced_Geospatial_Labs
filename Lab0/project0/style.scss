@@ -117,7 +117,12 @@ body{
 }
 
 .contact-container{
-    background-color: #eef3f8;
+    background: linear-gradient(
+    135deg,
+    #2c2c2c,
+    #3b4f6b,
+    #2c2c2c
+  );
     border-radius: 12px;
 }
 
