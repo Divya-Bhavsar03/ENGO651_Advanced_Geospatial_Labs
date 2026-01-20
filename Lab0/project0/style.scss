@@ -138,6 +138,11 @@ body{
     background: #cfd1d3;
 }
 
+.contact-links img:hover{
+    transform: scale(1.3);
+    transition: 0.5s;
+}
+
 footer {
   font-size: 0.9rem;
   letter-spacing: 0.5px;
