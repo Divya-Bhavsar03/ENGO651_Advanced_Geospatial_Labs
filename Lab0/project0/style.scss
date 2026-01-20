@@ -103,6 +103,11 @@ body{
     width: 90px;
 }
 
+.submit-btn:hover{
+    transform: scale(1.13);
+    transition: ease-in 0.3s;
+}
+
 .contact-links{
     display: flex;
     align-items: center;
