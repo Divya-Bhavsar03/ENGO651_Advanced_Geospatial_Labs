@@ -160,3 +160,26 @@ footer {
     letter-spacing: 2px;
     font-size: 18px;
 }
+
+@media (max-width: 768px) {
+  .skill-img {
+    width: 80px;
+    height: 80px;
+  }
+
+  .about-container {
+    padding: 15px;
+  }
+
+  #page-title {
+    font-size: 1.8rem;
+  }
+}
+
+@media (max-width: 979px){
+    .profile-img{
+        width: 180px;
+        height: 180px;
+        margin-top: 30px;
+    }
+}
