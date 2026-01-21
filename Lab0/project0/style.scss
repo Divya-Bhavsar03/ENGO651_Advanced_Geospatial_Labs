@@ -98,8 +98,13 @@ body{
     }
 }
 
-.submit-btn{
+.btn-base{
     border: none;
+    transition: ease-in 0.3s;
+}
+
+.submit-btn{
+    @extend .btn-base;
     width: 90px;
 }
 

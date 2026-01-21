@@ -84,8 +84,12 @@ body {
   cursor: pointer;
 }
 
-.submit-btn {
+.btn-base, .submit-btn {
   border: none;
+  transition: ease-in 0.3s;
+}
+
+.submit-btn {
   width: 90px;
 }
 
