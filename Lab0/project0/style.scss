@@ -188,3 +188,36 @@ footer {
         margin-top: 30px;
     }
 }
+
+@media (max-width: 576px) {
+  .about-container {
+    margin: 2px !important;
+    padding: 15px;
+
+    h1{
+        font-size: 20px;
+        font-weight: 300;
+    }
+
+    p{
+        font-size: 17px;
+    }
+
+    h1 span{
+        font-weight: 300;
+        font-size: 40px;
+    }
+  }
+}
+
+@media (max-width: 576px) {
+  .skill-img {
+    width: 60px;
+    height: 60px;
+  }
+
+  .skill-table th {
+    font-size: 0.9rem;
+    padding: 8px;
+  }
+}
