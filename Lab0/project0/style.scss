@@ -297,3 +297,33 @@ footer {
     font-size: 0.8rem;
   }
 }
+
+@media (max-width: 576px){
+    .experience-container{
+        margin-top: 20px;
+    }
+
+    .experience-container .uofc-img, .linestar-img{
+        width: 150px;
+        height: 150px;
+    }
+
+    .experience-container .col-md-6 h4{
+        font-size: 14px;
+        margin-top: 20px;
+        font-weight: 300;
+        text-decoration: none;
+    }
+
+    .experience-container .col-md-6 h5{
+        font-size: 13px;
+    }
+
+    .experience-container .col-md-6 h6{
+        font-size: 13px;
+    }
+
+    .experience-container .col-md-6 ul li{
+        font-size: 12px;
+    }
+}
