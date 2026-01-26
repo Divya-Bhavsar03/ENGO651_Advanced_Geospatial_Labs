@@ -279,4 +279,23 @@ footer {
   .experience-container .col-md-6 ul li {
     font-size: 12px;
   }
+}
+@media (max-width: 576px) {
+  .index-container .row .col-md-8 h1 {
+    font-size: 24px;
+  }
+  .index-container .row .col-md-8 p {
+    font-size: 13px;
+  }
+  .index-container .row .col-md-4 img {
+    width: 120px;
+    height: 120px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .index-container {
+    padding: 15px;
+    display: block;
+  }
 }/*# sourceMappingURL=style.css.map */
