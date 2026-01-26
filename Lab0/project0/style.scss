@@ -264,3 +264,32 @@ footer {
     height: 70px;
   }
 }
+
+@media (max-width: 576px) {
+
+  .education-container{
+    margin-top: 20px;
+  }
+
+  .education-container .uofc-img, .gtu-img{
+    width: 150px;
+    height: 150px;
+  }
+
+  .education-container .col-md-6 h4{
+    font-size: 14px;
+    margin-top: 20px;
+    font-weight: 300;
+    text-decoration: none;
+  }
+
+  .education-container .col-md-6 h5{
+    font-size: 13px;
+    font-weight: 400;
+  }
+
+  .education-container .col-md-6 h5 strong{
+    font-size: 12px;
+    font-weight: 500;
+  }
+}
