@@ -191,4 +191,42 @@ footer {
     font-size: 0.9rem;
     padding: 8px;
   }
+}
+@media (max-width: 576px) {
+  .contact-container {
+    width: 100%;
+    margin: 0 auto !important;
+    padding: 15px;
+  }
+  .contact-container form {
+    width: 100% !important;
+  }
+  .contact-container label {
+    font-size: 0.85rem;
+  }
+  .contact-container input,
+  .contact-container textarea {
+    font-size: 0.85rem;
+    padding: 8px 10px;
+  }
+  .contact-container input::-moz-placeholder, .contact-container textarea::-moz-placeholder {
+    font-size: 0.8rem;
+  }
+  .contact-container input::placeholder,
+  .contact-container textarea::placeholder {
+    font-size: 0.8rem;
+  }
+  .submit-btn {
+    font-size: 0.85rem;
+    padding: 6px 10px;
+  }
+  .contact-container .h6 {
+    font-size: 0.8rem;
+    margin-bottom: 12px;
+    font-weight: 300;
+  }
+  .contact-container .contact-links a img {
+    width: 70px;
+    height: 70px;
+  }
 }/*# sourceMappingURL=style.css.map */
