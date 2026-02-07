@@ -5,6 +5,12 @@
     <div class="col-md-6">
         <h2 class="mb-3 mt-5">Create an Account</h2>
 
+        {% if error %}
+        <div class="alert alert-danger" role="alert">
+            {{error}}
+        </div>
+        {% endif %}
+
         <form action="/register" method="post">
             <div class="form-group">
                 <label>Username</label>

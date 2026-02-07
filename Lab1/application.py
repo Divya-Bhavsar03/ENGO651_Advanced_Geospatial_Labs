@@ -1,6 +1,6 @@
 import os
 
-from flask import Flask, session, render_template, request
+from flask import Flask, session, render_template, request, redirect, flash
 from flask_session import Session
 from sqlalchemy import create_engine, text
 from sqlalchemy.orm import scoped_session, sessionmaker
@@ -36,21 +36,22 @@ def register():
         password = request.form.get("password")
 
         if not username:
-            return "Username is missing!"
+            return render_template("register.html", error="Username is missing!")
         if not password:
-            return "Password is missing!"
+            return render_template("register.html", error="Password is missing!")
         
         check_user = db.execute(text("SELECT * FROM users WHERE username=:username"),{"username":username}).fetchone()
 
         if check_user:
-            return "This username has already been taken. Choose another."
+            return render_template("register.html",error="This username has already been taken. Choose another.")
         
         hashed_password = generate_password_hash(password)
 
         db.execute(text("INSERT INTO users (username, password) VALUES(:username, :password)"), {"username":username, "password":hashed_password})
         db.commit()
 
-        return "Registration Successful! Proceed to Login!"
+        flash("Registration Successful! You can login now.")
+        return redirect("/login")
 
     else:
         return render_template("register.html")
