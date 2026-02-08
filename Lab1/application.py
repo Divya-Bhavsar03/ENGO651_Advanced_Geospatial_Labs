@@ -82,7 +82,23 @@ def login():
 
     else:
         return render_template("login.html")
+
+@app.route("/search", methods=["POST"])
+def search():
+    if "user_id" not in session:
+        return redirect("/login")
     
+    query = request.form.get("query")
+
+    if not query:
+        return render_template("index.html", error="Please enter a search term!")
+    
+    search_query = f"%{query}%"
+
+    books = db.execute(text("SELECT * FROM books WHERE isbn ILIKE :q OR title ILIKE :q OR author ILIKE :q"), {"q":search_query}).mappings().all()
+
+    return render_template("search.html", books=books, query=query)
+
 @app.route("/logout")
 def logout():
     session.clear()

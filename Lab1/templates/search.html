@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+
+{% block body %}
+    <h2 class="mt-4">Search results for "{{query}}"</h2>
+    <p class="text-muted">Found {{books|length}} matches.</p>
+
+    {% if books %}
+        <div class="list-group mt-3">
+            {% for book in books %}
+                <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1">{{book.title}}</h5>
+                        <small class="text-muted">{{book.year}}</small>
+                    </div>
+                    <p class="mb-1">Author: {{book.author}}</p>
+                    <small>ISBN: {{book.isbn}}</small>
+                </a>
+            {% endfor %}
+        </div>
+        <a href="/" class="btn btn-secondary mt-2">Go back</a>
+    {% else %}
+        <div class="alert alert-warning mt-4" role="alert">
+            No books found matching your search. Try another term.
+        </div>
+        <a href="/" class="btn btn-secondary mt-2">Go back</a>
+    {% endif %}
+{% endblock %}
