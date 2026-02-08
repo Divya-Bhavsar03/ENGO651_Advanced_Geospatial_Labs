@@ -56,6 +56,29 @@ def register():
     else:
         return render_template("register.html")
 
-@app.route("/login")
+@app.route("/login", methods=["GET","POST"])
 def login():
-    return render_template("login.html")
+
+    session.clear()
+
+    if request.method == "POST":
+        input_username = request.form.get("username")
+        input_password = request.form.get("password")
+
+        if not input_username:
+            return render_template("login.html", error="Please provide your username")
+        elif not input_password:
+            return render_template("login.html", error="Please provide your password")
+        
+        rows = db.execute(text("SELECT * FROM users WHERE username=:username"), {"username":input_username}).mappings().all()
+
+        if len(rows)!=1 or not check_password_hash(rows[0]["password"], input_password):
+            return render_template("login.html", error="Invalid username and/or password")
+        
+        session["user_id"] = rows[0]["id"]
+        session["user_name"] = rows[0]["username"]
+
+        return redirect("/")
+
+    else:
+        return render_template("login.html")
