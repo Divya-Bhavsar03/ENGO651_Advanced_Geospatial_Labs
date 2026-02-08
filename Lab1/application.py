@@ -99,6 +99,18 @@ def search():
 
     return render_template("search.html", books=books, query=query)
 
+@app.route("/book/<isbn>")
+def book(isbn):
+    if "user_id" not in session:
+        return redirect("/login")
+    
+    row = db.execute(text("SELECT * FROM books WHERE isbn = :isbn"),{"isbn":isbn}).mappings().fetchone()
+
+    if row is None:
+        return render_template("book.html", error="No such book exists")
+    
+    return render_template("book.html", book=row)
+
 @app.route("/logout")
 def logout():
     session.clear()

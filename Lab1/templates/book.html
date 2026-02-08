@@ -1,0 +1,42 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<div class="row">
+    <div class="col-md-8">
+        <h1 class="display-4">{{book.title}}</h1>
+        <h3 class="text-muted">by {{book.author}}</h3>
+        <p>Published in: {{book.year}}</p>
+        <p>ISBN: {{book.isbn}}</p>
+
+        <hr>
+
+        <h4>Reviews</h4>
+        <p><em>No reviews yet. You could be the first one to review.</em></p>
+
+        <div class="card bg-light p-3 mt-4">
+            <h5>Leave a Review</h5>
+            <form>
+                <div class="form-group">
+                    <label>Rating</label>
+                    <select class="form-control">
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <textarea class="form-control" rows="3" placeholder="What do you think about this book?"></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="mt-4">
+<a href="/" class="btn btn-secondary">Back to search</a>
+</div>
+{% endblock %}
