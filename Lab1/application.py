@@ -11,6 +11,8 @@ load_dotenv()
 
 app = Flask(__name__)
 
+app.secret_key = "my_secret_key"
+
 # Check for environment variable
 if not os.getenv("DATABASE_URL"):
     raise RuntimeError("DATABASE_URL is not set")
@@ -58,8 +60,6 @@ def register():
 
 @app.route("/login", methods=["GET","POST"])
 def login():
-
-    session.clear()
 
     if request.method == "POST":
         input_username = request.form.get("username")
