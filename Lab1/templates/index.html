@@ -3,8 +3,15 @@
 {% block body %}
 <div class="text-center">
     <h1>Welcome to BookOrbit!</h1>
-    <p>Sign up to search for books and leave reviews.</p>
-    <hr class="my-4">
-    <a role="button" class="btn btn-primary btn-lg" href="/register">Get Started</a>
+
+    {% if session.user_id %}
+        <h3 >Hello, {{session.user_name}}!</h3>
+        <button class="btn btn-danger" type="submit"><a href="/logout" style="text-decoration: none; color: white;">Log out</a></button>
+        <hr class="my-4">
+    {% else %}
+        <p>Sign up to search for books and leave reviews.</p>
+        <hr class="my-4">
+        <a role="button" class="btn btn-primary btn-lg" href="/register">Get Started</a>
+    {% endif %}
 </div>
 {% endblock %}
