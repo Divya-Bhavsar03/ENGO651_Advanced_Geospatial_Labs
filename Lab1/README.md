@@ -36,7 +36,7 @@ This project was build as a part of ENGO 651 - Advanced Geospatial Topics Course
 * **Security:** Werkzeug (Password Hashing)
 
 ---
-**Developer:** Divya Bhavsar
-ENGO 651 - Advanced Geospatial Topics
-MEng Geomatics Engineering
+**Developer:** Divya Bhavsar<br>
+ENGO 651 - Advanced Geospatial Topics<br>
+MEng Geomatics Engineering<br>
 University Of Calgary
