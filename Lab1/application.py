@@ -1,5 +1,5 @@
 import os
-
+import requests
 from flask import Flask, session, render_template, request, redirect, flash
 from flask_session import Session
 from sqlalchemy import create_engine, text
@@ -99,7 +99,7 @@ def search():
 
     return render_template("search.html", books=books, query=query)
 
-@app.route("/book/<isbn>")
+@app.route("/book/<isbn>", methods=["GET", "POST"])
 def book(isbn):
     if "user_id" not in session:
         return redirect("/login")
@@ -109,7 +109,45 @@ def book(isbn):
     if row is None:
         return render_template("book.html", error="No such book exists")
     
-    return render_template("book.html", book=row)
+    book_id = row["id"]
+
+    if request.method == "POST":
+        rating = request.form.get("rating")
+        comment = request.form.get("comment")
+        user_id = session["user_id"]
+
+        existing_review = db.execute(text("SELECT * FROM reviews WHERE user_id = :uid AND book_id = :bid"), {"uid":user_id, "bid":book_id}).fetchone()
+
+        if existing_review:
+            flash("You have already reviewed this book!")
+
+        else:
+            db.execute(text("INSERT INTO reviews (rating, comment, user_id, book_id) VALUES(:rating, :comment, :uid, :bid)"),{"rating":rating, "comment":comment, "uid":user_id, "bid": book_id})
+            db.commit()
+            flash("Review Submitted successfully!")
+
+        return redirect(f"/book/{isbn}")
+    
+    reviews = db.execute(text("SELECT r.rating, r.comment, u.username FROM reviews r JOIN users u ON r.user_id = u.id WHERE r.book_id = :bid"),{"bid":book_id}).mappings().all()
+
+    google_data = {}
+    try:
+        response = requests.get("https://www.googleapis.com/books/v1/volumes", params={"q":f"isbn:{isbn}"})
+        data = response.json()
+
+        if "items" in data:
+            volume_info = data["items"][0]["volumeInfo"]
+            google_data = {
+                "average_rating": volume_info.get("averageRating", "N/A"),
+                "ratings_count": volume_info.get("ratingsCount", 0),
+                "description": volume_info.get("description", "No description available.")
+            }
+
+    except Exception as e:
+        print(f"Error fetching Google Data: {e}")
+        google_data = {"average_rating": "N/A", "ratings_count": 0, "description": "Couldn't load description."}
+
+    return render_template("book.html", book=row, reviews=reviews, google_data=google_data)
 
 @app.route("/logout")
 def logout():
