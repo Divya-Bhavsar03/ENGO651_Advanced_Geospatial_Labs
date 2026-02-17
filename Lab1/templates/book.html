@@ -1,6 +1,15 @@
 {% extends "layout.html" %}
 
 {% block body %}
+
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-info">{{message}}</div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+
 <div class="row">
     <div class="col-md-8">
         <h1 class="display-4">{{book.title}}</h1>
@@ -8,26 +17,44 @@
         <p>Published in: {{book.year}}</p>
         <p>ISBN: {{book.isbn}}</p>
 
+        <div class="card bg-light mb-4 p-3 border-0 shadow-sm">
+            <h5>Google Books Info</h5>
+            <p><strong>Average Rating:</strong>{{google_data.average_rating}} / 5 ({{google_data.ratings_count}} votes)</p>
+            <p><strong>Description:</strong></p>
+            <p class="small text-muted">{{google_data.description}}</p>
+        </div>
         <hr>
 
         <h4>Reviews</h4>
+        {% if reviews %}
+            {% for review in reviews %}
+                <div class="card mb-3 shadow-sm border-0">
+                    <div class="card-body">
+                        <h5 class="card-title">Rating: {{review.rating}}/5</h5>
+                        <p class="card-text">{{review.comment}}</p>
+                        <p class="card-text"><small class="text-muted">By {{review.username}}</small></p>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
         <p><em>No reviews yet. You could be the first one to review.</em></p>
+        {% endif %}
 
         <div class="card bg-light p-3 mt-4">
             <h5>Leave a Review</h5>
-            <form>
+            <form action="/book/{{book.isbn}}" method="post">
                 <div class="form-group">
                     <label>Rating</label>
-                    <select class="form-control">
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
+                    <select class="form-control" name="rating">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
                     </select>
                 </div>
                 <div class="form-group">
-                    <textarea class="form-control" rows="3" placeholder="What do you think about this book?"></textarea>
+                    <textarea class="form-control" name="comment" rows="3" placeholder="What do you think about this book?"></textarea>
                 </div>
 
                 <button type="submit" class="btn btn-primary">Submit</button>
