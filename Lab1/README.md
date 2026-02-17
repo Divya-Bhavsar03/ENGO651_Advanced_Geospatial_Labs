@@ -1,4 +1,5 @@
 # Project 1
+Lab2 - Update
 
 # BookOrbit
 **BookOrbit** is a web application designed for book lovers to discover, track, and review books. 
