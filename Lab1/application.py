@@ -1,6 +1,6 @@
 import os
 import requests
-from flask import Flask, session, render_template, request, redirect, flash
+from flask import Flask, session, render_template, request, redirect, flash, jsonify
 from flask_session import Session
 from sqlalchemy import create_engine, text
 from sqlalchemy.orm import scoped_session, sessionmaker
@@ -130,22 +130,48 @@ def book(isbn):
     
     reviews = db.execute(text("SELECT r.rating, r.comment, u.username FROM reviews r JOIN users u ON r.user_id = u.id WHERE r.book_id = :bid"),{"bid":book_id}).mappings().all()
 
-    google_data = {}
+    google_data = {
+        "average_rating": "N/A",
+        "ratings_count": 0,
+        "description": "No description available.",
+        "summary": "No summary available."
+    }
     try:
-        response = requests.get("https://www.googleapis.com/books/v1/volumes", params={"q":f"isbn:{isbn}"})
+        clean_isbn = isbn.strip()
+        
+        response = requests.get("https://www.googleapis.com/books/v1/volumes", params={"q":f"isbn:{clean_isbn}"})
         data = response.json()
-
         if "items" in data:
             volume_info = data["items"][0]["volumeInfo"]
-            google_data = {
-                "average_rating": volume_info.get("averageRating", "N/A"),
-                "ratings_count": volume_info.get("ratingsCount", 0),
-                "description": volume_info.get("description", "No description available.")
-            }
+            desc = volume_info.get("description", "No description available.")
+
+            google_data["average_rating"] = volume_info.get("averageRating", "N/A")
+            google_data["ratings_count"] = volume_info.get("ratingsCount", 0)
+            google_data["description"] = desc
+
+            api_key = os.getenv("GOOGLE_API_KEY")
+
+            if api_key and desc!="No description available.":
+                gemini_url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key={api_key}"
+
+                payload = {
+                    "contents": [
+                        {
+                            "parts": [{"text": f"summarize this text using less than 50 words: {desc}"}]
+                        }
+                    ]
+                }
+
+                gemini_res = requests.post(gemini_url, headers={"Content-Type": "application/json"}, json=payload)
+                gemini_data = gemini_res.json()
+
+                try:
+                    google_data["summary"] = gemini_data["candidates"][0]["content"]["parts"][0]["text"]
+                except (KeyError, IndexError):
+                    google_data["summary"] = "Could not generate summary."
 
     except Exception as e:
         print(f"Error fetching Google Data: {e}")
-        google_data = {"average_rating": "N/A", "ratings_count": 0, "description": "Couldn't load description."}
 
     return render_template("book.html", book=row, reviews=reviews, google_data=google_data)
 
@@ -153,3 +179,55 @@ def book(isbn):
 def logout():
     session.clear()
     return redirect("/")
+
+@app.route("/api/<isbn>")
+def book_api(isbn):
+    row = db.execute(text("SELECT * FROM books WHERE isbn = :isbn"), {"isbn": isbn}).mappings().fetchone()
+
+    if row is None:
+        return jsonify({"error": "Invalid ISBN"}), 404
+    
+    book_id = row["id"]
+
+    review_data = db.execute(text("SELECT COUNT(id) as count FROM reviews WHERE book_id = :bid"), {"bid": book_id}).mappings().fetchone()
+    local_review_count = review_data["count"]
+
+    google_avg_rating = None
+    google_desc = None
+    google_summary = None
+
+    try:
+        clean_isbn = isbn.strip()
+        response = requests.get("https://www.googleapis.com/books/v1/volumes", params={"q": f"isbn:{clean_isbn}"})
+        data = response.json()
+
+        if "items" in data:
+            volume_info = data["items"][0]["volumeInfo"]
+            google_avg_rating = volume_info.get("averageRating", None)
+            google_desc = volume_info.get("description", None)
+
+            api_key = os.getenv("GOOGLE_API_KEY")
+            if api_key and google_desc:
+                gemini_url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key={api_key}"
+                payload = {"contents": [{"parts": [{"text": f"summarize this text using less than 50 words: {google_desc}"}]}]}
+                gemini_res = requests.post(gemini_url, headers={"Content-Type": "application/json"}, json=payload).json()
+
+                try:
+                    google_summary = gemini_res["candidates"][0]["content"]["parts"][0]["text"]
+
+                except (KeyError, IndexError):
+                    pass
+
+    except Exception as e:
+        print(f"API fetch error: {e}")
+
+    return jsonify({
+        "title": row["title"],
+        "author": row["author"],
+        "publishedDate": str(row["year"]),
+        "ISBN_10": isbn,
+        "ISBN_13": isbn,
+        "reviewCount": local_review_count,
+        "averageRating": google_avg_rating,
+        "summarizedDescription": google_summary
+    })
