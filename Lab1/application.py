@@ -138,6 +138,7 @@ def book(isbn):
     }
     try:
         clean_isbn = isbn.strip()
+        api_key = os.getenv("GOOGLE_API_KEY")
         
         response = requests.get("https://www.googleapis.com/books/v1/volumes", params={"q":f"isbn:{clean_isbn}"})
         data = response.json()
@@ -149,7 +150,7 @@ def book(isbn):
             google_data["ratings_count"] = volume_info.get("ratingsCount", 0)
             google_data["description"] = desc
 
-            api_key = os.getenv("GOOGLE_API_KEY")
+           
 
             if api_key and desc!="No description available.":
                 gemini_url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key={api_key}"
@@ -198,6 +199,7 @@ def book_api(isbn):
 
     try:
         clean_isbn = isbn.strip()
+        api_key = os.getenv("GOOGLE_API_KEY")
         response = requests.get("https://www.googleapis.com/books/v1/volumes", params={"q": f"isbn:{clean_isbn}"})
         data = response.json()
 
@@ -206,7 +208,7 @@ def book_api(isbn):
             google_avg_rating = volume_info.get("averageRating", None)
             google_desc = volume_info.get("description", None)
 
-            api_key = os.getenv("GOOGLE_API_KEY")
+            
             if api_key and google_desc:
                 gemini_url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key={api_key}"
                 payload = {"contents": [{"parts": [{"text": f"summarize this text using less than 50 words: {google_desc}"}]}]}
