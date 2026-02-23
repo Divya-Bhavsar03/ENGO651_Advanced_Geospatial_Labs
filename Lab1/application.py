@@ -140,7 +140,7 @@ def book(isbn):
         clean_isbn = isbn.strip()
         api_key = os.getenv("GOOGLE_API_KEY")
         
-        response = requests.get("https://www.googleapis.com/books/v1/volumes", params={"q":f"isbn:{clean_isbn}"})
+        response = requests.get("https://www.googleapis.com/books/v1/volumes", params={"q":f"isbn:{clean_isbn}", "key":api_key})
         data = response.json()
         if "items" in data:
             volume_info = data["items"][0]["volumeInfo"]
@@ -200,7 +200,7 @@ def book_api(isbn):
     try:
         clean_isbn = isbn.strip()
         api_key = os.getenv("GOOGLE_API_KEY")
-        response = requests.get("https://www.googleapis.com/books/v1/volumes", params={"q": f"isbn:{clean_isbn}"})
+        response = requests.get("https://www.googleapis.com/books/v1/volumes", params={"q": f"isbn:{clean_isbn}", "key":api_key})
         data = response.json()
 
         if "items" in data:
