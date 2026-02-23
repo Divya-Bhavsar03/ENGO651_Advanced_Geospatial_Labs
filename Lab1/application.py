@@ -153,7 +153,7 @@ def book(isbn):
            
 
             if api_key and desc!="No description available.":
-                gemini_url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key={api_key}"
+                gemini_url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key={api_key}"
 
                 payload = {
                     "contents": [
@@ -210,7 +210,7 @@ def book_api(isbn):
 
             
             if api_key and google_desc:
-                gemini_url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key={api_key}"
+                gemini_url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key={api_key}"
                 payload = {"contents": [{"parts": [{"text": f"summarize this text using less than 50 words: {google_desc}"}]}]}
                 gemini_res = requests.post(gemini_url, headers={"Content-Type": "application/json"}, json=payload).json()
 
