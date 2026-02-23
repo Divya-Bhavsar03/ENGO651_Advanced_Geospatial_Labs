@@ -1,5 +1,12 @@
-# Project 1
+# Project 1-2
 Lab2 - Update
+
+## 🚀 What's New in Lab 2?
+This version extends the base functionality from Lab 1 by adding AI, external data fetching, and user interactivity:
+* **Google Books API Integration:** The app now fetches real-time data for each book, including its average rating, total votes, and official description.
+* **Gemini AI Summaries:** Integrates the Google Gemini 2.5 Flash API. The AI automatically reads the long book description and generates a customized short summary (under 50 words).
+* **User Reviews System:** Logged-in users can now leave a 1-5 star rating and a text comment for any book. These reviews are saved persistently in the database and displayed to all users.
+* **JSON API Endpoint:** A new programmatic route (`/api/<isbn>`) was created. It allows external applications to retrieve a book's local data, total review count, Google average rating, and Gemini AI summary in a standard JSON format.
 
 # BookOrbit
 **BookOrbit** is a web application designed for book lovers to discover, track, and review books. 
