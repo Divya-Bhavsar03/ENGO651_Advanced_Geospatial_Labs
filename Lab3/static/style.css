@@ -104,3 +104,13 @@ input[type="date"] {
 #searchBtn:hover {
     background: #189278;
 }
+
+.leaflet-popup-content-wrapper {
+    background: #504e4e;
+    color: #f3f3f3;
+    border-radius: 8px;
+}
+
+.leaflet-popup-tip {
+    background: #e62929;
+}

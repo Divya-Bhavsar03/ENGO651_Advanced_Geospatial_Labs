@@ -31,11 +31,12 @@ document.getElementById('searchBtn').addEventListener('click', function() {
                 onEachFeature: function (feature, layer) {
                     
                     const popupText = `
-                        <b>Issue Date:</b> ${feature.properties.issueddate}<br>
-                        <b>Work Class:</b> ${feature.properties.workclassgroup}<br>
+                        <b style="color:#0ed7ed; font-size:15px;">Building Permit</b><hr style="border-color:#ed9b0e;">
+                        <b>Date:</b> ${feature.properties.issueddate?.substring(0,10) || 'N/A'}<br>
+                        <b>Work Class:</b> ${feature.properties.workclassgroup || 'N/A'}<br>
                         <b>Contractor:</b> ${feature.properties.contractorname || 'N/A'}<br>
-                        <b>Community:</b> ${feature.properties.communityname}<br>
-                        <b>Address:</b> ${feature.properties.originaladdress}
+                        <b>Community:</b> ${feature.properties.communityname || 'N/A'}<br>
+                        <b>Address:</b> ${feature.properties.originaladdress || 'N/A'}
                     `;
                     
                     layer.bindPopup(popupText);
