@@ -114,3 +114,21 @@ input[type="date"] {
 .leaflet-popup-tip {
     background: #e62929;
 }
+
+.intro{
+    margin-top: 20px;
+    text-align: left;
+    border: 1px solid #ccc;
+    padding: 15px;
+    box-shadow: 1px 1px 5px rgba(0,0,0,0.1);
+}
+
+.welcome-message{
+    color: #b913eb;
+    font-weight: bolder;
+    font-size: 20px;
+}
+
+p b{
+    color: #e62929;
+}
