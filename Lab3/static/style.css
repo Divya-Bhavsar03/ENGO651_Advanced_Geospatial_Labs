@@ -132,3 +132,13 @@ input[type="date"] {
 p b{
     color: #e62929;
 }
+
+footer {
+    text-align: center;
+    padding: 10px;
+    background: #141414;
+    color: #888;
+    font-size: 22px;
+    border-top: 1px solid #2a2a2a;
+    margin-top: 20px;
+}
