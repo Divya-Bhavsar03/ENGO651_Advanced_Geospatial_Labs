@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@200..900&display=swap');
+
 #map {
     height: 600px; 
     width: 100%;
@@ -6,8 +8,17 @@
 }
 
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Inconsolata', monospace;
     margin: 20px;
+}
+
+h1 {
+    font-family: 'Inconsolata', 'monospace';
+    font-size: 36px;
+    letter-spacing: 2px;
+    margin: 0;
+    margin-bottom: 10px;
+    text-align: center;
 }
 
 #loadingOverlay {
@@ -42,4 +53,54 @@ body {
 
 @keyframes spin {
     to { transform: rotate(360deg); }
+}
+
+.searchbar{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    justify-content: space-around;
+}
+
+label{
+    font-weight: bold;
+    width: 90px;
+    text-align: right;
+}
+
+.search-start{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.search-end{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+input[type="date"] {
+    border: 1px solid #2a2a2a;
+    padding: 9px 14px;
+    border-radius: 4px;
+    outline: none;
+    cursor: pointer;
+    transition: border-color 0.2s;
+    align-items: center;
+    justify-content: center;
+}   
+
+#searchBtn{
+    padding: 10px 40px;
+    font-size: 16px;
+    font-weight: bold;
+    background: #00af89;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+#searchBtn:hover {
+    background: #189278;
 }
