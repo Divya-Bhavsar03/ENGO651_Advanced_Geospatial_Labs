@@ -21,6 +21,8 @@ document.getElementById('searchBtn').addEventListener('click', function() {
     markersGroup.clearLayers();
     oms.clearMarkers();
 
+    document.getElementById('loadingOverlay').classList.add('active');
+
     fetch(`/api/permits?start=${start}&end=${end}`)
         .then(response => response.json()) 
         .then(data => {
@@ -52,5 +54,8 @@ document.getElementById('searchBtn').addEventListener('click', function() {
             }
             
         })
-        .catch(error => console.error('Error fetching data:', error));
+        .catch(error => console.error('Error fetching data:', error))
+        .finally(() => {
+            document.getElementById('loadingOverlay').classList.remove('active');
+        });
 });
