@@ -14,3 +14,8 @@ This is a single-page web mapping application that allows users to filter and vi
 * **Frontend:** HTML, CSS, JavaScript, Leaflet.js
 * **Backend:** Python, Flask, Requests
 * **Data Source:** Open Calgary API
+
+# Student Name:
+**Divya Bhavsar**
+*MEng Geomatics Engineering*
+*University of Calgary*
