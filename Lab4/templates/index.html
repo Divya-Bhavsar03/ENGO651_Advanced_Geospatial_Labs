@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calgary Data Explorer</title>
+
+     <!-- Leaflet first -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    
+    <!-- MapLibre GL -->
+    <script src="https://unpkg.com/maplibre-gl@3.6.2/dist/maplibre-gl.js"></script>
+    <link href="https://unpkg.com/maplibre-gl@3.6.2/dist/maplibre-gl.css" rel="stylesheet" />
+    
+    <!-- MapLibre GL Leaflet -->
+    <script src="https://unpkg.com/@maplibre/maplibre-gl-leaflet@0.0.20/leaflet-maplibre-gl.js"></script>
+    
+    <!-- Marker Cluster -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css" />
+    <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
+    
+    <!-- Overlapping Marker Spiderfier -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OverlappingMarkerSpiderfier-Leaflet/0.2.6/oms.min.js"></script>
+
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div id="loadingOverlay">
+        <div id="loadingSpinner"></div>
+        <p>Fetching permits...</p>
+    </div>
+
+    <h1>Calgary Data Explorer</h1>
+
+    <div class="searchbar">
+        <div class="search-start">
+            <label for="startDate">Start Date:</label>
+            <input type="date" id="startDate">
+        </div>
+        
+        <div class="search-end">
+            <label for="endDate">End Date:</label>
+            <input type="date" id="endDate">
+        </div>
+        
+        <button id="searchBtn">Search</button>
+    </div>
+
+    <div class="intro">
+        <p class="welcome-message">Welcome to the Calgary City Data Explorer!.</p>
+        <p><b>New Feature:</b> You can also use the layer control box in the top right corner of the map to toggle the <b>2017 Traffic Incidents</b> on and off.</p>
+        <p>Explore building permits and traffic patterns across Calgary. Use the date filters to find building permits, or toggle the 2017 Traffic Incidents layer to see accident spots.</p>
+    </div>
+
+    <div id="map"></div>
+
+    <script src="/static/script.js"></script>
+
+    <footer>&copy; Divya Bhavsar. All Rights Reserved.</footer>
+</body>
+</html>
