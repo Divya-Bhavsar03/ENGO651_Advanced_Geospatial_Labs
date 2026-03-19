@@ -6,8 +6,6 @@ const osmBaseMap = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',
 });
 osmBaseMap.addTo(map);
 
-const MAPBOX_TOKEN = '{{ mapbox_token }}';
-
 const trafficLayer = L.tileLayer(
     `https://api.mapbox.com/styles/v1/divya-bhavsar/cmmxmnuc0002301r9gt6l6bt8/tiles/{z}/{x}/{y}?access_token=${MAPBOX_TOKEN}`,
     {
