@@ -156,3 +156,44 @@ function shareStatus() {
         }
     );
 }
+
+// Function that runs every time a message arrives from the broker
+function onMessageArrived(message) {
+    // Convert the plain text message back into a JavaScript object
+    var payload = JSON.parse(message.payloadString);
+
+    // Extract the data from the GeoJSON structure
+    var lng = payload.geometry.coordinates[0];
+    var lat = payload.geometry.coordinates[1];
+    var temp = payload.properties.temperature;
+
+    // Determine the marker color based on the temperature
+    var markerColor = "blue"; 
+    
+    if (temp >= -40 && temp < 10) {
+        markerColor = "blue";
+    } else if (temp >= 10 && temp < 30) {
+        markerColor = "green";
+    } else if (temp >= 30 && temp <= 60) {
+        markerColor = "red";
+    }
+
+    // Remove the old marker if one already exists on the map
+    if (myMarker !== null) {
+        map.removeLayer(myMarker);
+    }
+
+    // Draw the new marker on the map using a colored circle
+    myMarker = L.circleMarker([lat, lng], {
+        color: markerColor,
+        fillColor: markerColor,
+        fillOpacity: 0.8,
+        radius: 12
+    }).addTo(map);
+
+    // Add a popup that shows the temperature when the marker is clicked
+    myMarker.bindPopup("Temperature: " + temp + " °C");
+
+    // Automatically move the map view to center on new location
+    map.setView([lat, lng], 13);
+}
