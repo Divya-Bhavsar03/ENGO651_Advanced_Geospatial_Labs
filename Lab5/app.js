@@ -100,3 +100,59 @@ function onMessageArrived(message) {
     console.log("New message arrived on topic: " + message.destinationName);
     console.log("Message content: " + message.payloadString);
 }
+
+shareBtn.addEventListener("click", shareStatus);
+
+function shareStatus() {
+    //Check if the browser supports GPS location
+    if (!navigator.geolocation) {
+        alert("Geolocation is not supported by your browser.");
+        return; // Stop the function here if it's not supported
+    }
+
+    //Ask the browser for the current location
+    navigator.geolocation.getCurrentPosition(
+        // This success part runs if it successfully finds location
+        function(position) {
+            var lat = position.coords.latitude;
+            var lng = position.coords.longitude;
+
+            // Generate a random temperature between -40 and 60
+            var randomTemp = (Math.random() * 100) - 40;
+            
+            // Round the temperature to 1 decimal place 
+            var finalTemp = Number(randomTemp.toFixed(1));
+
+            // Create the GeoJSON object
+            var geoJSONMessage = {
+                "type": "Feature",
+                "geometry": {
+                    "type": "Point",
+                    "coordinates": [lng, lat] 
+                },
+                "properties": {
+                    "temperature": finalTemp
+                }
+            };
+
+            var payloadString = JSON.stringify(geoJSONMessage);
+
+            // Create the MQTT message and prepare it for sending
+            var message = new Paho.MQTT.Message(payloadString);
+            
+            // Tell the message exactly which topic to go to
+            message.destinationName = myTopic;
+
+            // send the message to the broker
+            mqttClient.send(message);
+
+            // Print to the console
+            console.log("Just published this message: " + payloadString);
+        },
+        
+        // This error part runs if the user blocks location access
+        function(error) {
+            alert("Error getting location. Please allow location permissions in your browser.");
+        }
+    );
+}
