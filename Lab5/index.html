@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IoT Geoweb App</title>
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.min.js" type="text/javascript"></script>
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <h2>My IoT Sensor App</h2>
+
+    <div>
+        <label for="hostInput">Host:</label>
+        <input type="text" id="hostInput" value="test.mosquitto.org">
+        
+        <label for="portInput">Port:</label>
+        <input type="number" id="portInput" value="8080">
+    </div>
+
+    <div style="margin-top: 10px;">
+        <button id="startBtn">Start</button>
+        <button id="endBtn" disabled>End</button>
+        <button id="shareBtn" disabled>Share my status</button>
+    </div>
+
+    <hr>
+
+    <p id="statusMessage">Status: Disconnected</p>
+
+    <div id="map"></div>
+
+    <script src="app.js"></script>
+</body>
+</html>
