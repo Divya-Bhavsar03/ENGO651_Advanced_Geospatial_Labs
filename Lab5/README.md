@@ -49,3 +49,6 @@ The application reads the temperature from the incoming MQTT message and changes
 4. **View Map:** The map will jump to your current location. Click the colored circle marker to see a popup with the topic name and temperature.
 5. **Test Custom Messages:** Scroll to the bottom, enter a custom topic (e.g., `test/hi`) and a message, then click **Publish**. 
 6. **Disconnect:** Click the **End** button to close the connection to the server.
+
+## Name: Divya Bhavsar  
+### MEng Geomatics Engineering, University of Calgary
