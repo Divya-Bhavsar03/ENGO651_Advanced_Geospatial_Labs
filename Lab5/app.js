@@ -44,7 +44,8 @@ function connectToBroker() {
     // Try to connect, and specify what to do on success or failure
     mqttClient.connect({
         onSuccess: onConnect,
-        onFailure: onFail
+        onFailure: onFail,
+        useSSL: true //testing
     });
 }
 
