@@ -19,10 +19,14 @@ var portInput = document.getElementById("portInput");
 var startBtn = document.getElementById("startBtn");
 var endBtn = document.getElementById("endBtn");
 var shareBtn = document.getElementById("shareBtn");
+var customTopicInput = document.getElementById("customTopicInput");
+var customMessageInput = document.getElementById("customMessageInput");
+var publishBtn = document.getElementById("publishBtn");
 var statusMessage = document.getElementById("statusMessage");
 
 startBtn.addEventListener("click", connectToBroker);
 endBtn.addEventListener("click", disconnectFromBroker);
+publishBtn.addEventListener("click", publishCustomMessage);
 
 // Function to start the connection when the Start button is clicked
 function connectToBroker() {
@@ -61,6 +65,7 @@ function onConnect() {
     // Unlock the End and Share buttons
     endBtn.disabled = false;
     shareBtn.disabled = false;
+    publishBtn.disabled = false;
 
     // Subscribe to topic immediately
     mqttClient.subscribe(myTopic);
@@ -84,6 +89,7 @@ function disconnectFromBroker() {
     startBtn.disabled = false;
     endBtn.disabled = true;
     shareBtn.disabled = true;
+    publishBtn.disabled = true;
 }
 
 // Function that runs if the network drops unexpectedly
@@ -94,6 +100,7 @@ function onConnectionLost(responseObject) {
         setTimeout(connectToBroker, 3000);
         
         shareBtn.disabled = true;
+        publishBtn.disabled = true;
     }
 }
 
@@ -197,4 +204,22 @@ function onMessageArrived(message) {
 
     // Automatically move the map view to center on new location
     map.setView([lat, lng], 13);
+}
+
+// Function to publish a generic message to any topic
+function publishCustomMessage() {
+    var topic = customTopicInput.value;
+    var payload = customMessageInput.value;
+
+    if (topic === "" || payload === "") {
+        alert("Please enter both a topic and a message.");
+        return;
+    }
+
+    // Create and send the message
+    var message = new Paho.MQTT.Message(payload);
+    message.destinationName = topic;
+    mqttClient.send(message);
+
+    console.log("Custom message sent to " + topic);
 }
